@@ -18,83 +18,75 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 80);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
     };
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-lg shadow-lg py-4"
+          ? "bg-[#081B33]/92 backdrop-blur-xl border-b border-white/10 shadow-xl py-4"
           : "bg-transparent py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
 
         {/* Logo */}
 
-        <Link href="/">
+        <Link href="/" className="flex items-center">
           <Image
             src="/logo/logo.png"
-            alt="Verkoper"
-            width={180}
-            height={60}
-            className="h-14 w-auto"
+            alt="Verkoper Property Solutions"
+            width={260}
+            height={90}
             priority
+            className={`w-auto transition-all duration-500 ${
+              scrolled ? "h-16" : "h-20"
+            }`}
           />
         </Link>
 
-        {/* Desktop Menu */}
+        {/* Desktop Navigation */}
 
-        <nav className="hidden lg:flex items-center gap-10">
-
+        <nav className="hidden items-center gap-10 lg:flex">
           {navLinks.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className={`font-medium transition duration-300 ${
-                scrolled
-                  ? "text-[#081B33] hover:text-[#C9A03C]"
-                  : "text-white hover:text-[#C9A03C]"
-              }`}
+              className="group relative text-[15px] font-medium tracking-wide text-white transition-colors duration-300 hover:text-[#C9A03C]"
             >
               {item.name}
+
+              <span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-[#C9A03C] transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
-
         </nav>
 
         {/* CTA */}
 
         <a
           href="#contact"
-          className={`hidden lg:inline-flex items-center rounded-xl px-7 py-3 font-semibold transition duration-300 ${
-            scrolled
-              ? "bg-[#C9A03C] text-white hover:bg-[#b88d2f]"
-              : "border border-[#C9A03C] text-white hover:bg-[#C9A03C]"
-          }`}
+          className="hidden rounded-full bg-[#C9A03C] px-8 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#b88d2f] lg:inline-flex"
         >
-          We're Hiring
+          Career
         </a>
 
-        {/* Mobile */}
+        {/* Mobile Button */}
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`lg:hidden ${
-            scrolled ? "text-[#081B33]" : "text-white"
-          }`}
+          className="text-white lg:hidden"
         >
           {isOpen ? (
-            <HiOutlineX size={30} />
+            <HiOutlineX size={32} />
           ) : (
-            <HiOutlineMenuAlt3 size={30} />
+            <HiOutlineMenuAlt3 size={32} />
           )}
         </button>
 
@@ -102,17 +94,21 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
 
-      {isOpen && (
-        <div className="lg:hidden bg-white shadow-lg">
+      <div
+        className={`overflow-hidden transition-all duration-500 lg:hidden ${
+          isOpen ? "max-h-[450px]" : "max-h-0"
+        }`}
+      >
+        <div className="border-t border-white/10 bg-[#081B33]/95 backdrop-blur-xl">
 
-          <div className="px-6 py-6 flex flex-col gap-6">
+          <div className="flex flex-col gap-6 px-6 py-8">
 
             {navLinks.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="font-medium text-[#081B33]"
+                className="text-lg font-medium text-white transition hover:text-[#C9A03C]"
               >
                 {item.name}
               </a>
@@ -121,7 +117,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setIsOpen(false)}
-              className="rounded-xl bg-[#C9A03C] py-3 text-center font-semibold text-white"
+              className="mt-2 rounded-full bg-[#C9A03C] py-3 text-center font-semibold text-white transition hover:bg-[#b88d2f]"
             >
               Start Project
             </a>
@@ -129,7 +125,7 @@ export default function Navbar() {
           </div>
 
         </div>
-      )}
+      </div>
     </header>
   );
 }

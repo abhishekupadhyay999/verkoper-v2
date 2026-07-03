@@ -127,7 +127,7 @@ export default function Footer() {
                 />
 
                 <span className="text-slate-300">
-                  info@verkoperpropertysolutions.com
+                  sales@Verkoper.co.in
                 </span>
 
               </div>
