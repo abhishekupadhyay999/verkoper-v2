@@ -11,12 +11,10 @@ export default function Hero() {
     >
       {/* Background */}
 
-      <Image
-      src="/verkoper-v2/public/Hero/hero-bg.jpg"
-      alt="Verkoper property"
-      fill
-      priority
-      className="absolute inset-0 object-cover object-[72%_centre]"
+      <img
+        src="/Hero/hero-bg.jpg"
+        alt="Verkoper Property"
+        className="absolute inset-0 h-full w-full object-cover object-[72%_center]"
       />
 
       {/* Overlay */}
