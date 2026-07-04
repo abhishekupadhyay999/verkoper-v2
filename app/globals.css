@@ -42,3 +42,6 @@ h6 {
 .text-gradient {
   color: var(--accent);
 }
+html {
+  scroll-behavior: smooth;
+}

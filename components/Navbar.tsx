@@ -13,6 +13,9 @@ const navLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
+const careerLink =
+  "https://docs.google.com/forms/d/e/1FAIpQLSfNFay6V4NSXLMbkGOyJthtsFiw4p_JT_-zvg_e2FvI3HRvfw/viewform";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -36,15 +39,13 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-
         {/* Logo */}
-
         <Link href="/" className="flex items-center">
           <Image
             src="/logo/logo.png"
             alt="Verkoper Property Solutions"
-            width={260}
-            height={90}
+            width={300}
+            height={100}
             priority
             className={`w-auto transition-all duration-500 ${
               scrolled ? "h-16" : "h-20"
@@ -53,56 +54,47 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-
-        <nav className="hidden items-center gap-10 lg:flex">
+        <nav className="hidden lg:flex items-center gap-10">
           {navLinks.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className="group relative text-[15px] font-medium tracking-wide text-white transition-colors duration-300 hover:text-[#C9A03C]"
+              className="group relative text-[15px] font-medium tracking-wide text-white transition-all duration-300 hover:text-[#C9A03C]"
             >
               {item.name}
 
-              <span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-[#C9A03C] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-[#C9A03C] transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </nav>
 
-        {/* CTA */}
-
+        {/* Careers Button */}
         <a
-          href="#contact"
-          className="hidden rounded-full bg-[#C9A03C] px-8 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#b88d2f] lg:inline-flex"
+          href={careerLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden lg:inline-flex items-center rounded-full bg-[#C9A03C] px-8 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#b88d2f]"
         >
-          Career
+          Careers
         </a>
 
-        {/* Mobile Button */}
-
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="text-white lg:hidden"
         >
-          {isOpen ? (
-            <HiOutlineX size={32} />
-          ) : (
-            <HiOutlineMenuAlt3 size={32} />
-          )}
+          {isOpen ? <HiOutlineX size={32} /> : <HiOutlineMenuAlt3 size={32} />}
         </button>
-
       </div>
 
       {/* Mobile Menu */}
-
       <div
         className={`overflow-hidden transition-all duration-500 lg:hidden ${
-          isOpen ? "max-h-[450px]" : "max-h-0"
+          isOpen ? "max-h-[500px]" : "max-h-0"
         }`}
       >
         <div className="border-t border-white/10 bg-[#081B33]/95 backdrop-blur-xl">
-
           <div className="flex flex-col gap-6 px-6 py-8">
-
             {navLinks.map((item) => (
               <a
                 key={item.name}
@@ -115,15 +107,15 @@ export default function Navbar() {
             ))}
 
             <a
-              href="#contact"
+              href={careerLink}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="mt-2 rounded-full bg-[#C9A03C] py-3 text-center font-semibold text-white transition hover:bg-[#b88d2f]"
+              className="mt-2 rounded-full bg-[#C9A03C] py-3 text-center font-semibold text-white transition-all duration-300 hover:bg-[#b88d2f]"
             >
-              Start Project
+              Careers
             </a>
-
           </div>
-
         </div>
       </div>
     </header>
