@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -11,10 +11,12 @@ export default function Hero() {
     >
       {/* Background */}
 
-      <img
-        src="/hero/hero-bg.jpg"
-        alt="Verkoper Property"
-        className="absolute inset-0 h-full w-full object-cover object-[72%_center]"
+      <Image
+      src="/verkoper-v2/public/Hero/hero-bg.jpg"
+      alt="Verkoper property"
+      fill
+      priority
+      className="absolute inset-0 object-cover object-[72%_centre]"
       />
 
       {/* Overlay */}
