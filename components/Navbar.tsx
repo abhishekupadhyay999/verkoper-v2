@@ -14,7 +14,7 @@ const navLinks = [
 ];
 
 const careerLink =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfNFay6V4NSXLMbkGOyJthtsFiw4p_JT_-zvg_e2FvI3HRvfw/viewform";
+ "https://forms.gle/hRQMvb8KbRY62UQH6";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

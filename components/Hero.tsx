@@ -12,7 +12,7 @@ export default function Hero() {
       {/* Background */}
 
       <img
-        src="/Hero/hero-bg.jpg"
+        src="/Hero/hero-bg.png"
         alt="Verkoper Property"
         className="absolute inset-0 h-full w-full object-cover object-[72%_center]"
       />

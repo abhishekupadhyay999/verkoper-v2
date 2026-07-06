@@ -11,7 +11,7 @@ import {
 const stats = [
   {
     icon: Users,
-    number: "15+",
+    number: "25+",
     title: "Team Strength",
   },
   {
@@ -26,7 +26,7 @@ const stats = [
   },
   {
     icon: BadgeCheck,
-    number: "50,000+",
+    number: "2,000+",
     title: "Happy Customers",
   },
 ];
