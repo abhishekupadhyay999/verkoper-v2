@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { Leader } from "./leadershipData";
+import { Leader } from "./LeadershipData";
 import { useEffect } from "react";
 
 interface LeadershipModalProps {

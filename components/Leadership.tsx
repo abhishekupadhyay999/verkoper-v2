@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import LeadershipModal from "./LeadershipModal";
-import { leaders, Leader } from "./LeadershipData";
+import { leaders, type Leader } from "./LeadershipData";
 
 export default function Leadership() {
   const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
