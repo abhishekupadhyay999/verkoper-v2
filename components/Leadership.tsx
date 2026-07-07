@@ -1,106 +1,134 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-const leaders = [
-  {
-    name: "Chetan Gawde",
-    designation: "Founder & CFO",
-    bio: "With over 10 years of experience in real estate, finance and business operations, Chetan leads Verkoper's financial strategy and long-term business growth while ensuring transparency, operational excellence and value-driven solutions.",
-  },
-  {
-    name: "Hitesh Jagtap",
-    designation: "CEO & Co-Founder",
-    bio: "With 13+ years of leadership experience across the automobile and real estate sectors, Hitesh drives the company's vision, strategic partnerships and business development while building long-term value for developers and investors.",
-  },
-  {
-    name: "Divesh Bhoir",
-    designation: "Managing Director",
-    bio: "Backed by a strong family legacy in construction and more than a decade of industry experience, Divesh oversees operations, project execution and sustainable business growth through ethical leadership.",
-  },
-  {
-    name: "Pawan Upadhyay",
-    designation: "CSO & Co-Founder",
-    bio: "Pawan leads sales strategy and project marketing with a customer-first approach, helping developers achieve successful launches and long-term sales performance.",
-  },
-  {
-    name: "Mahesh Chavan",
-    designation: "Director – Sales & Marketing",
-    bio: "A multiple award-winning sales professional with over 10 years of experience, Mahesh specializes in residential, commercial and investment property solutions while driving Verkoper's marketing and sales initiatives.",
-  },
-];
+import LeadershipModal from "./LeadershipModal";
+import { leaders, Leader } from "./LeadershipData";
 
 export default function Leadership() {
+  const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
+
   return (
-    <section
-      id="leadership"
-      className="bg-[#F8FAFC] py-28"
-    >
-      <div className="max-w-7xl mx-auto px-6">
+    <>
+      <section
+        id="leadership"
+        className="bg-[#F8FAFC] py-28"
+      >
+        <div className="mx-auto max-w-7xl px-6">
 
-        {/* Heading */}
+          {/* Heading */}
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mx-auto text-center"
-        >
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: .6 }}
+            className="mx-auto mb-20 max-w-3xl text-center"
+          >
 
-          <p className="uppercase tracking-[5px] text-sm font-semibold text-[#C9A03C]">
-            OUR LEADERSHIP
-          </p>
+            <p className="text-sm font-semibold uppercase tracking-[5px] text-[#C9A03C]">
+              Leadership
+            </p>
 
-          <h2 className="mt-5 text-5xl font-semibold leading-tight text-[#081B33]">
-            Experienced Leaders.
-            <br />
-            Shared Vision.
-          </h2>
+            <h2 className="mt-5 text-5xl font-semibold text-[#081B33]">
+              Meet Our Leadership
+            </h2>
 
-          <p className="mt-7 text-lg leading-8 text-slate-600">
-            Our leadership team combines decades of experience in real estate,
-            finance, sales and business strategy to deliver exceptional value
-            and trusted guidance for every project.
-          </p>
+            <p className="mt-7 text-lg leading-8 text-slate-600">
+              Meet the experienced professionals leading Verkoper Property
+              Solutions with integrity, innovation and a customer-first
+              approach.
+            </p>
 
-        </motion.div>
+          </motion.div>
 
-        {/* Cards */}
+          {/* Cards */}
 
-        <div className="mt-20 grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
 
-          {leaders.map((leader, index) => (
+            {leaders.map((leader, index) => (
 
-            <motion.div
-              key={leader.name}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08 }}
-              viewport={{ once: true }}
-              className="rounded-2xl border border-slate-200 bg-white p-10 transition duration-300 hover:shadow-lg"
-            >
+              <motion.div
+                key={leader.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: index * 0.1,
+                  duration: .5,
+                }}
+                whileHover={{
+                  y: -8,
+                }}
+                className="group rounded-3xl border border-[#C9A03C]/20 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl"
+              >
 
-              <div className="h-1 w-16 rounded-full bg-[#C9A03C]" />
+                {/* Initials */}
 
-              <h3 className="mt-7 text-3xl font-semibold text-[#081B33]">
-                {leader.name}
-              </h3>
+                <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-[#C9A03C] bg-[#081B33] text-2xl font-bold text-[#C9A03C]">
 
-              <p className="mt-2 uppercase tracking-[2px] font-semibold text-[#C9A03C]">
-                {leader.designation}
-              </p>
+                  {leader.initials}
 
-              <p className="mt-6 leading-8 text-slate-600">
-                {leader.bio}
-              </p>
+                </div>
 
-            </motion.div>
+                {/* Name */}
 
-          ))}
+                <h3 className="mt-8 text-2xl font-semibold text-[#081B33]">
+
+                  {leader.name}
+
+                </h3>
+
+                {/* Designation */}
+
+                <p className="mt-2 font-medium text-[#C9A03C]">
+
+                  {leader.designation}
+
+                </p>
+
+                {/* Short Description */}
+
+                <p className="mt-6 leading-8 text-slate-600">
+
+                  {leader.shortDescription}
+
+                </p>
+
+                {/* Button */}
+
+                <button
+                  onClick={() => setSelectedLeader(leader)}
+                  className="mt-8 inline-flex items-center gap-2 font-semibold text-[#081B33] transition hover:text-[#C9A03C]"
+                >
+
+                  Read More
+
+                  <ArrowRight
+                    size={18}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+
+                </button>
+
+              </motion.div>
+
+            ))}
+
+          </div>
 
         </div>
 
-      </div>
-    </section>
+      </section>
+
+      <LeadershipModal
+        leader={selectedLeader}
+        isOpen={selectedLeader !== null}
+        onClose={() => setSelectedLeader(null)}
+      />
+
+    </>
   );
 }
