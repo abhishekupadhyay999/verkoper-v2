@@ -42,9 +42,9 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo/logo.png"
+            src="/logo/logo1.png"
             alt="Verkoper Property Solutions"
-            width={300}
+            width={200}
             height={100}
             priority
             className={`w-auto transition-all duration-500 ${

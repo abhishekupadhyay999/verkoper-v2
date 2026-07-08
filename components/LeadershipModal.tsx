@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { Leader } from "./LeadershipData";
-import { useEffect } from "react";
+import type { Leader } from "./LeadershipData";
 
 interface LeadershipModalProps {
   leader: Leader | null;
@@ -16,26 +15,16 @@ export default function LeadershipModal({
   isOpen,
   onClose,
 }: LeadershipModalProps) {
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKey);
-
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [onClose]);
+  if (!leader) return null;
 
   return (
     <AnimatePresence>
-      {isOpen && leader && (
+      {isOpen && (
         <>
           {/* Overlay */}
 
           <motion.div
-            className="fixed inset-0 z-[90] bg-black/70 backdrop-blur-md"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -48,31 +37,25 @@ export default function LeadershipModal({
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
-            transition={{ duration: 0.35 }}
-            className="fixed left-1/2 top-1/2 z-[100] w-[92%] max-w-4xl -translate-x-1/2 -translate-y-1/2"
+            transition={{ duration: 0.3 }}
+            className="fixed left-1/2 top-1/2 z-[60] w-[92%] max-w-4xl -translate-x-1/2 -translate-y-1/2"
           >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-2xl"
-            >
+            <div className="max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-2xl">
+
               {/* Header */}
 
-              <div className="relative overflow-hidden rounded-t-3xl bg-[#081B33] px-8 py-10 text-white">
-
-                {/* Close Button */}
+              <div className="relative bg-[#081B33] px-8 py-10 text-white">
 
                 <button
                   onClick={onClose}
-                  className="absolute right-6 top-6 rounded-full bg-white/10 p-2 transition hover:bg-white/20"
+                  className="absolute right-6 top-6 rounded-full bg-white/10 p-2 hover:bg-white/20"
                 >
                   <X size={22} />
                 </button>
 
-                {/* Initials */}
-
                 <div className="flex items-center gap-6">
 
-                  <div className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-[#C9A03C] bg-[#102845] text-3xl font-bold text-[#C9A03C] shadow-xl">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-[#C9A03C] bg-[#102845] text-2xl font-bold text-[#C9A03C]">
                     {leader.initials}
                   </div>
 
@@ -92,67 +75,50 @@ export default function LeadershipModal({
 
               {/* Body */}
 
-              <div className="space-y-10 px-8 py-10">
+              <div className="space-y-6 px-8 py-10">
 
-                {/* About */}
+                {leader.about.map((text, index) => {
+                  const isBullet = text.startsWith("•");
+                  const isHeading =
+                    text === "About Me" ||
+                    text === "Core Expertise:" ||
+                    text === "Key Responsibilities as Managing Director";
 
-                <div>
-
-                  <h3 className="mb-5 text-2xl font-semibold text-[#081B33]">
-                    About
-                  </h3>
-
-                  <div className="space-y-5 leading-8 text-slate-600">
-
-                    {leader.about.map((paragraph, index) => (
-                      <p key={index}>{paragraph}</p>
-                    ))}
-
-                  </div>
-
-                </div>
-
-                {/* Expertise */}
-
-                <div>
-
-                  <h3 className="mb-5 text-2xl font-semibold text-[#081B33]">
-                    Core Expertise
-                  </h3>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-
-                    {leader.expertise.map((item, index) => (
-                      <div
+                  if (isHeading) {
+                    return (
+                      <h3
                         key={index}
-                        className="rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-[#C9A03C]"
+                        className="mt-6 text-2xl font-bold text-[#081B33]"
                       >
-                        {item}
-                      </div>
-                    ))}
+                        {text}
+                      </h3>
+                    );
+                  }
 
-                  </div>
+                  if (isBullet) {
+                    return (
+                      <li
+                        key={index}
+                        className="ml-6 text-slate-700 leading-8"
+                      >
+                        {text.replace("•", "")}
+                      </li>
+                    );
+                  }
 
-                </div>
-
-                {/* Philosophy */}
-
-                <div className="rounded-2xl border-l-4 border-[#C9A03C] bg-[#F8FAFC] p-6">
-
-                  <h3 className="mb-3 text-xl font-semibold text-[#081B33]">
-                    Leadership Philosophy
-                  </h3>
-
-                  <p className="italic leading-8 text-slate-700">
-                    "{leader.philosophy}"
-                  </p>
-
-                </div>
+                  return (
+                    <p
+                      key={index}
+                      className="leading-8 text-slate-700"
+                    >
+                      {text}
+                    </p>
+                  );
+                })}
 
               </div>
 
             </div>
-
           </motion.div>
         </>
       )}
