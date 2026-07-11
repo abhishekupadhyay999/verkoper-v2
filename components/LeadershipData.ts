@@ -19,7 +19,7 @@ export const leaders: Leader[] = [
 
     about: [
       "About Me",
-      "Chetan Gawde",
+      "Mr. Chetan Gawde",
       "Founder & CFO, Verkoper Property Solutions",
 
       "With over 10 years of experience in the real estate industry, I have built a strong foundation in financial management, business operations, project sales, and strategic planning. My professional journey began as an Accountant, where I developed expertise in finance, compliance, and business administration. Over the years, I progressed into leadership roles, serving as a Managing General Manager and gaining extensive experience in managing real estate projects, sales operations, and team leadership.",
